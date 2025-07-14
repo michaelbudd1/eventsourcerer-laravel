@@ -22,11 +22,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Barryvdh\\Debugbar\\ServiceProvider"
-            ],
-            "aliases": {
-                "Debugbar": "Barryvdh\\Debugbar\\Facade"
-            }
+                "Eventsourcerer\\EventSourcererLaravel\\Providers\\EventSourcererProvider"
+            ]
         }
     },
     "minimum-stability": "dev"
