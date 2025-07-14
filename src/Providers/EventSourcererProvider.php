@@ -18,7 +18,7 @@ final class EventSourcererProvider extends ServiceProvider
                 new Config(
                     config('eventsourcerer.host'),
                     config('eventsourcerer.url'),
-                    config('eventsourcerer.port'),
+                    (int) config('eventsourcerer.port'),
                     config('eventsourcerer.applicationId')
                 )
             );
