@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\FetchEvents;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
@@ -29,5 +30,11 @@ final class EventSourcererProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/eventsourcerer.php', 'eventsourcerer'
         );
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                FetchEvents::class,
+            ]);
+        }
     }
 }
