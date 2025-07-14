@@ -18,21 +18,10 @@ class FetchEvents extends Command
      */
     protected $description = 'Fetches new events';
 
-    public function handle(): void
+    public function handle(Client $client): void
     {
-        $client = (
-            new Client(
-                new Config(
-                    '0.0.0.0',
-                    'https://eventsourcerer.docker.localhost',
-                    1984,
-                    '40e71a4d-7a86-56c7-b51e-c4053523f28f'
-                )
-            )
-        )->connect();
-
         $client->fetchMessages(function ($message) {
-            \Log::info(json_encode($message));
+            \Log::info('NEW: ' . json_encode($message));
         });
     }
 }
