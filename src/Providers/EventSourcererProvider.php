@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\FetchEvents;
+use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
+use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
@@ -22,6 +24,10 @@ final class EventSourcererProvider extends ServiceProvider
                     config('eventsourcerer.applicationId')
                 )
             );
+        });
+
+        $this->app->singleton(EventHandler::class, static function () {
+            return new DefaultEventHandler();
         });
     }
 

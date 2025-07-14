@@ -2,26 +2,17 @@
 
 namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
 
+use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Illuminate\Console\Command;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
-use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
 
-class FetchEvents extends Command
+final class FetchEvents extends Command
 {
-    /**
-     * @var string
-     */
     protected $signature = 'eventsourcerer:fetch-events';
-
-    /**
-     * @var string
-     */
     protected $description = 'Fetches new events';
 
-    public function handle(Client $client): void
+    public function handle(Client $client, EventHandler $eventHandler): void
     {
-        $client->fetchMessages(function ($message) {
-            \Log::info('NEW: ' . json_encode($message));
-        });
+        $client->connect()->fetchMessages($eventHandler->handle());
     }
 }
