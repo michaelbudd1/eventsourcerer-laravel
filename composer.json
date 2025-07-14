@@ -1,0 +1,33 @@
+{
+    "name": "eventsourcerer/event-sourcerer-laravel",
+    "description": "Tools for connecting to EventSourcerer and processing events",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Eventsourcerer\\EventSourcererLaravel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "michaelbudd",
+            "email": "michaelbudd6@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.3",
+        "illuminate/support": "^12.20",
+        "illuminate/console": "^12.20",
+        "eventsourcerer/event-sourcerer-client": "dev-main"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Barryvdh\\Debugbar\\ServiceProvider"
+            ],
+            "aliases": {
+                "Debugbar": "Barryvdh\\Debugbar\\Facade"
+            }
+        }
+    },
+    "minimum-stability": "dev"
+}
