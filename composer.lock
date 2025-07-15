@@ -218,12 +218,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sorcerer-client.git",
-                "reference": "8dcec9d908d4d17d1a789c66a24ff5b608af99fa"
+                "reference": "45bd9b075cf76f79d1ea5a967572c810ca83a41d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/8dcec9d908d4d17d1a789c66a24ff5b608af99fa",
-                "reference": "8dcec9d908d4d17d1a789c66a24ff5b608af99fa",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/45bd9b075cf76f79d1ea5a967572c810ca83a41d",
+                "reference": "45bd9b075cf76f79d1ea5a967572c810ca83a41d",
                 "shasum": ""
             },
             "require": {
@@ -259,7 +259,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sorcerer-client/issues",
                 "source": "https://github.com/michaelbudd1/event-sorcerer-client/tree/main"
             },
-            "time": "2025-07-13T06:46:35+00:00"
+            "time": "2025-07-14T20:38:14+00:00"
         },
         {
             "name": "eventsourcerer/message-utilities",
