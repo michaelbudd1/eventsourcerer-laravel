@@ -10,6 +10,8 @@ use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
+use PearTreeWeb\EventSourcerer\Client\Infrastructure\Repository\CachedInFlightEvents;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 final class EventSourcererProvider extends ServiceProvider
 {
@@ -22,6 +24,11 @@ final class EventSourcererProvider extends ServiceProvider
                     config('eventsourcerer.url'),
                     (int) config('eventsourcerer.port'),
                     config('eventsourcerer.applicationId')
+                ),
+                new CachedInFlightEvents(
+                    new FilesystemAdapter(
+                        config('eventsourcerer.cache.path')
+                    )
                 )
             );
         });
@@ -33,9 +40,9 @@ final class EventSourcererProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/eventsourcerer.php', 'eventsourcerer'
-        );
+        $this->publishes([
+            __DIR__.'/../config/eventsourcerer.php' => config_path('eventsourcerer.php'),
+        ]);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
