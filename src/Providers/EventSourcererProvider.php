@@ -27,7 +27,7 @@ final class EventSourcererProvider extends ServiceProvider
                 ),
                 new CachedInFlightEvents(
                     new FilesystemAdapter(
-                        config('eventsourcerer.cache.path')
+                        directory: config('eventsourcerer.cache.path')
                     )
                 )
             );
