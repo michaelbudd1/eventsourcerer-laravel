@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
 
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
