@@ -19,6 +19,10 @@ final class EventSourcererProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Client::class, static function () {
+            $cache = new FilesystemAdapter(
+                directory: config('eventsourcerer.cache.path')
+            );
+
             return new Client(
                 new Config(
                     config('eventsourcerer.host'),
@@ -26,16 +30,8 @@ final class EventSourcererProvider extends ServiceProvider
                     (int) config('eventsourcerer.port'),
                     config('eventsourcerer.applicationId')
                 ),
-                new CachedInFlightEvents(
-                    new FilesystemAdapter(
-                        directory: config('eventsourcerer.cache.path')
-                    )
-                ),
-                new CachedAvailableEvents(
-                    new FilesystemAdapter(
-                        directory: config('eventsourcerer.cache.path')
-                    )
-                )
+                new CachedInFlightEvents($cache),
+                new CachedAvailableEvents($cache)
             );
         });
 
