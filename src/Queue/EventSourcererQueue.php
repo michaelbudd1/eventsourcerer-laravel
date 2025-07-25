@@ -6,6 +6,7 @@ namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Illuminate\Contracts\Queue\Queue;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationId;
 
 final readonly class EventSourcererQueue implements Queue
 {
@@ -48,7 +49,9 @@ final readonly class EventSourcererQueue implements Queue
 
     public function pop($queue = null)
     {
-        return $this->client->fetchOneMessage();
+        return $this->client->fetchOneMessage(
+            ApplicationId::fromString('87fe0af1-c27f-53ac-ba05-6508930e17e4')
+        );
     }
 
     public function getConnectionName()
