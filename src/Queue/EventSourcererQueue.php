@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
-use Illuminate\Contracts\Queue\Queue;
+use Illuminate\Queue\Queue;
+use Illuminate\Contracts\Queue\Queue as QueueContract;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationId;
 
-final readonly class EventSourcererQueue implements Queue
+final class EventSourcererQueue extends Queue implements QueueContract
 {
-    public function __construct(private Client $client) {}
+    public function __construct(
+        private readonly Client $client,
+        private readonly ApplicationId $applicationId
+    ) {}
 
     public function size($queue = null)
     {
@@ -20,11 +24,6 @@ final readonly class EventSourcererQueue implements Queue
     public function push($job, $data = '', $queue = null)
     {
         // TODO: Implement push() method.
-    }
-
-    public function pushOn($queue, $job, $data = '')
-    {
-        // TODO: Implement pushOn() method.
     }
 
     public function pushRaw($payload, $queue = null, array $options = [])
@@ -37,31 +36,9 @@ final readonly class EventSourcererQueue implements Queue
         // TODO: Implement later() method.
     }
 
-    public function laterOn($queue, $delay, $job, $data = '')
+    public function pop($queue = null): ?array
     {
-        // TODO: Implement laterOn() method.
-    }
-
-    public function bulk($jobs, $data = '', $queue = null)
-    {
-        // TODO: Implement bulk() method.
-    }
-
-    public function pop($queue = null)
-    {
-        return $this->client->fetchOneMessage(
-            ApplicationId::fromString('87fe0af1-c27f-53ac-ba05-6508930e17e4')
-        );
-    }
-
-    public function getConnectionName()
-    {
-        // TODO: Implement getConnectionName() method.
-    }
-
-    public function setConnectionName($name)
-    {
-        // TODO: Implement setConnectionName() method.
+        return $this->client->fetchOneMessage($this->applicationId);
     }
 
     public function __call(string $name, array $arguments)
