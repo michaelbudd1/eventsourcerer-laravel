@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
+use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
@@ -36,9 +37,19 @@ final class EventSourcererQueue extends Queue implements QueueContract
         // TODO: Implement later() method.
     }
 
-    public function pop($queue = null): ?array
+    public function pop($queue = null): ?EventSourcererJob
     {
-        return $this->client->fetchOneMessage($this->applicationId);
+        $event = $this->client->fetchOneMessage($this->applicationId);
+
+        if (null === $event) {
+            return null;
+        }
+
+        return new EventSourcererJob(
+            $this->container,
+            $this->queue,
+            $event
+        );
     }
 
     public function __call(string $name, array $arguments)
