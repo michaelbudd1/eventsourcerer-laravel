@@ -47,7 +47,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
         return new EventSourcererJob(
             $this->container,
-            $this->queue,
+            'eventsourcerer',
             $event
         );
     }
