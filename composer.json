@@ -17,7 +17,8 @@
         "php": ">=8.3",
         "illuminate/support": "^12.20",
         "illuminate/console": "^12.20",
-        "eventsourcerer/event-sourcerer-client": "dev-main"
+        "eventsourcerer/event-sourcerer-client": "dev-main",
+        "illuminate/queue": "12.x-dev"
     },
     "extra": {
         "laravel": {

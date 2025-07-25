@@ -7,6 +7,7 @@ namespace Eventsourcerer\EventSourcererLaravel\Providers;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\FetchEvents;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
+use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
@@ -51,5 +52,12 @@ final class EventSourcererProvider extends ServiceProvider
                 FetchEvents::class,
             ]);
         }
+
+        $manager = $this->app['queue'];
+        $manager->addConnector('eventsourcerer', function() {
+            return new EventSourcererConnector(
+                $this->app->make(Client::class)
+            );
+        });
     }
 }
