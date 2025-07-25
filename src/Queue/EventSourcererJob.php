@@ -18,9 +18,9 @@ final class EventSourcererJob extends Job implements JobContract
         return $this->event['allSequence'];
     }
 
-    public function getRawBody(): array
+    public function getRawBody(): string
     {
-        return $this->event;
+        return json_encode($this->event, JSON_THROW_ON_ERROR);
     }
 
     public function attempts(): int
