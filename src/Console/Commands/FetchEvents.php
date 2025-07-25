@@ -15,6 +15,6 @@ final class FetchEvents extends Command
 
     public function handle(Client $client, EventHandler $eventHandler): void
     {
-        $client->connect()->fetchMessages($eventHandler->handle());
+        $client->connect()->listenForMessages($eventHandler->handle());
     }
 }
