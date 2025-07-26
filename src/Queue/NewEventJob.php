@@ -21,7 +21,6 @@ class NewEventJob implements ShouldQueue, ShouldBeUnique
 
     public function uniqueId(): string
     {
-        dd($this->event);
         return $this->event['streamId'];
     }
 }
