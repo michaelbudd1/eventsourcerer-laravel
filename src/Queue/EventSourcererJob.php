@@ -22,7 +22,6 @@ final class EventSourcererJob extends Job implements JobContract
         $this->payload = $payload;
         $this->container = $container;
         $this->connectionName = self::EVENTSOURCERER;
-        $this->job = NewEventJob::class;
     }
 
     public function attempts(): int
@@ -37,7 +36,10 @@ final class EventSourcererJob extends Job implements JobContract
 
     public function getRawBody(): string
     {
-        return json_encode($this->payload, JSON_THROW_ON_ERROR);
+        $payload        = $this->payload;
+        $payload['job'] = NewEventJob::class;
+
+        return json_encode($payload, JSON_THROW_ON_ERROR);
     }
 
     public function getQueue(): string
