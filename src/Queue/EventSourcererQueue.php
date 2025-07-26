@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Illuminate\Queue\Jobs\Job;
+use Illuminate\Queue\Jobs\SyncJob;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
