@@ -11,7 +11,9 @@ final readonly class DefaultEventHandler implements EventHandler
     public function handle(): callable
     {
         return static function (array $event): void {
-            dispatch(new NewEventJob($event));
+            $job = (new NewEventJob($event))->onConnection('eventsourcerer');
+
+            dispatch($job);
         };
     }
 }

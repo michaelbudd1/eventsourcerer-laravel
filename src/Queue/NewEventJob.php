@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewEventJob implements ShouldQueue, ShouldBeUnique
+class NewEventJob implements ShouldQueue
 {
     use Queueable;
 
@@ -17,10 +17,7 @@ class NewEventJob implements ShouldQueue, ShouldBeUnique
     public function handle(): void
     {
         dump($this->event);
-    }
 
-    public function uniqueId(): string
-    {
-        return $this->event['streamId'];
+        sleep(2);
     }
 }
