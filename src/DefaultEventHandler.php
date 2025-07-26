@@ -12,8 +12,6 @@ final readonly class DefaultEventHandler implements EventHandler
     {
         return static function (array $event): void {
             dispatch(new NewEventJob($event));
-
-            echo 'Dispatched job!' . PHP_EOL;
         };
     }
 }

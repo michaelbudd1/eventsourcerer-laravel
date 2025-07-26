@@ -4,27 +4,44 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\Job as JobContract;
 use Illuminate\Queue\Jobs\Job;
 
 final class EventSourcererJob extends Job implements JobContract
 {
-    public function __construct(protected $container, protected $queue, private readonly array $event)
-    {
-    }
+    private const string EVENTSOURCERER = 'eventsourcerer';
 
-    public function getJobId(): int
-    {
-        return $this->event['allSequence'];
-    }
+    protected $job;
 
-    public function getRawBody(): string
+    protected $payload;
+
+    public function __construct(Container $container, array $payload)
     {
-        return json_encode($this->event, JSON_THROW_ON_ERROR);
+        $this->queue = 'sync';
+        $this->payload = $payload;
+        $this->container = $container;
+        $this->connectionName = self::EVENTSOURCERER;
+        $this->job = NewEventJob::class;
     }
 
     public function attempts(): int
     {
-        return 0;
+        return 1;
+    }
+
+    public function getJobId(): string
+    {
+        return '';
+    }
+
+    public function getRawBody(): string
+    {
+        return json_encode($this->payload, JSON_THROW_ON_ERROR);
+    }
+
+    public function getQueue(): string
+    {
+        return self::EVENTSOURCERER;
     }
 }
