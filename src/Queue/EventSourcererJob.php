@@ -10,8 +10,6 @@ use Illuminate\Queue\Jobs\Job;
 
 final class EventSourcererJob extends Job implements JobContract
 {
-    private const string EVENTSOURCERER = 'eventsourcerer';
-
     protected $job;
 
     protected $payload;
@@ -21,7 +19,6 @@ final class EventSourcererJob extends Job implements JobContract
         $this->queue = $queue;
         $this->payload = $payload;
         $this->container = $container;
-        $this->connectionName = self::EVENTSOURCERER;
     }
 
     public function attempts(): int
@@ -37,13 +34,13 @@ final class EventSourcererJob extends Job implements JobContract
     public function getRawBody(): string
     {
         $payload        = $this->payload;
-        $payload['job'] = NewEventJob::class;
+        $payload['job'] = sprintf('%s@%s', NewEventJob::class, 'handle');
 
         return json_encode($payload, JSON_THROW_ON_ERROR);
     }
 
     public function getQueue(): string
     {
-        return self::EVENTSOURCERER;
+        return $this->queue;
     }
 }
