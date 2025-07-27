@@ -14,11 +14,14 @@ final class EventSourcererJob extends Job implements JobContract
 
     protected $payload;
 
-    public function __construct(Container $container, array $payload, string $queue)
+    protected $connectionName;
+
+    public function __construct(Container $container, array $payload, string $queue, string $connectionName)
     {
         $this->queue = $queue;
         $this->payload = $payload;
         $this->container = $container;
+        $this->connectionName = $connectionName;
     }
 
     public function attempts(): int
@@ -28,7 +31,7 @@ final class EventSourcererJob extends Job implements JobContract
 
     public function getJobId(): string
     {
-        return (string) $this->payload['allSequenceId'];
+        return (string) $this->payload['allSequence'];
     }
 
     public function getRawBody(): string

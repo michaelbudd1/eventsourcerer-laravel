@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Illuminate\Contracts\Queue\Job;
-use Illuminate\Queue\Jobs\SyncJob;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
@@ -13,6 +12,8 @@ use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationId;
 
 final class EventSourcererQueue extends Queue implements QueueContract
 {
+    private const string CONNECTION_NAME = 'eventsourcerer';
+
     public function __construct(
         private readonly Client $client,
         private readonly ApplicationId $applicationId
@@ -47,6 +48,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
             return null;
         }
 
-        return new EventSourcererJob($this->container, $event, $queue);
+        return new EventSourcererJob($this->container, $event, $queue, self::CONNECTION_NAME);
     }
 }
