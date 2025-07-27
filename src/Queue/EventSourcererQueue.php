@@ -47,13 +47,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
             return null;
         }
 
-        return new SyncJob(
-            $this->container,
-            json_encode($event, JSON_THROW_ON_ERROR),
-            'eventsourcerer',
-            $queue
-        );
-
-//        return new EventSourcererJob($this->container, $event, $queue);
+        return new EventSourcererJob($this->container, $event, $queue);
     }
 }
