@@ -47,12 +47,6 @@ final class EventSourcererProvider extends ServiceProvider
             __DIR__.'/../config/eventsourcerer.php' => config_path('eventsourcerer.php'),
         ]);
 
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                FetchEvents::class,
-            ]);
-        }
-
         $manager = $this->app['queue'];
         $manager->addConnector('eventsourcerer', function() {
             return new EventSourcererConnector(
