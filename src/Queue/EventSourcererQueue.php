@@ -48,8 +48,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
             return null;
         }
 
-        ;
-
         return new EventSourcererJob(
             $this->container,
             $this->createPayload(new NewEventJob($event), $queue),
