@@ -17,7 +17,9 @@ final class EventSourcererQueue extends Queue implements QueueContract
     public function __construct(
         private readonly Client $client,
         private readonly ApplicationId $applicationId
-    ) {}
+    ) {
+        $this->client->connect();
+    }
 
     public function size($queue = null): int
     {
