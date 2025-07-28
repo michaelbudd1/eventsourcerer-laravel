@@ -36,14 +36,9 @@ final class EventSourcererJob extends Job implements JobContract
 
     public function getRawBody(): string
     {
-        return json_encode($this->event, JSON_THROW_ON_ERROR);
-    }
-
-    public function payload(): array
-    {
-        return [
-            'job' => sprintf('%s@%s', NewEventJob::class, 'handle'),
+        return json_encode([
+           'job' => sprintf('%s@%s', NewEventJob::class, 'handle'),
             'data' => $this->event,
-        ];
+        ], JSON_THROW_ON_ERROR);
     }
 }
