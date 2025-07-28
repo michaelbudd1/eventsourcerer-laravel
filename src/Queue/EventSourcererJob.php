@@ -12,13 +12,21 @@ final class EventSourcererJob extends Job implements JobContract
 {
     protected $job;
 
-    protected $event;
+    protected $payload;
 
     protected $connectionName;
 
-    public function __construct(Container $container, array $event, string $queue, string $connectionName)
-    {
+    private array $event;
+
+    public function __construct(
+        Container $container,
+        string $payload,
+        array $event,
+        string $queue,
+        string $connectionName
+    ) {
         $this->queue = $queue;
+        $this->payload = $payload;
         $this->event = $event;
         $this->container = $container;
         $this->connectionName = $connectionName;
@@ -36,9 +44,10 @@ final class EventSourcererJob extends Job implements JobContract
 
     public function getRawBody(): string
     {
-        return json_encode([
-           'job' => sprintf('%s@%s', NewEventJob::class, 'handle'),
-            'data' => $this->event,
-        ], JSON_THROW_ON_ERROR);
+        return $this->payload;
+//        return json_encode([
+//           'job' => sprintf('%s@%s', NewEventJob::class, 'handle'),
+//            'data' => $this->event,
+//        ], JSON_THROW_ON_ERROR);
     }
 }
