@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
@@ -20,10 +21,10 @@ final class EventSourcererQueue extends Queue implements QueueContract
         private readonly Client $client,
         private readonly ApplicationId $applicationId
     ) {
-        Process::start(self::command());
+        Process::start(self::startServerCommand());
     }
 
-    private static function command(): string
+    private static function startServerCommand(): string
     {
         return sprintf(
             'php artisan %s',
@@ -72,6 +73,13 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function removeFromQueue(array $event): void
     {
-        $this->client->acknowledgeEvent($this->applicationId, $event);
+        Process::start(
+            sprintf(
+            RemoveEventFromQueue::SIGNATURE_PREFIX . ' %s %d %d',
+                '*',
+                $event['sequence'],
+                $event['allSequence']
+            )
+        );
     }
 }

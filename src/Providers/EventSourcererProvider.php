@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
@@ -55,6 +56,7 @@ final class EventSourcererProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ListenForEvents::class,
+                RemoveEventFromQueue::class,
             ]);
         }
     }
