@@ -12,7 +12,6 @@ use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Repository\CachedAvailableEvents;
-use PearTreeWeb\EventSourcerer\Client\Infrastructure\Repository\CachedInFlightEvents;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 final class EventSourcererProvider extends ServiceProvider
@@ -31,7 +30,6 @@ final class EventSourcererProvider extends ServiceProvider
                     (int) config('eventsourcerer.port'),
                     config('eventsourcerer.applicationId')
                 ),
-                new CachedInFlightEvents($cache),
                 new CachedAvailableEvents($cache)
             );
         });
