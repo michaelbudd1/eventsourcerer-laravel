@@ -77,7 +77,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
             sprintf(
             RemoveEventFromQueue::SIGNATURE_PREFIX . ' %s %d %d',
                 '*',
-                $event['sequence'],
+                $event['number'],
                 $event['allSequence']
             )
         );
