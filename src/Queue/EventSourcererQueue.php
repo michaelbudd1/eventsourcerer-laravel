@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
-use Eventsourcerer\EventSourcererLaravel\EventHandler;
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
+use Illuminate\Support\Facades\Process;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationId;
 
@@ -17,10 +18,17 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function __construct(
         private readonly Client $client,
-        private readonly ApplicationId $applicationId,
-        private readonly EventHandler $eventHandler
+        private readonly ApplicationId $applicationId
     ) {
-        $this->client->connect()->listenForMessages($this->eventHandler->handle());
+        Process::start(self::command());
+    }
+
+    private static function command(): string
+    {
+        return sprintf(
+            'php artisan %s',
+            ListenForEvents::SIGNATURE
+        );
     }
 
     public function size($queue = null): int

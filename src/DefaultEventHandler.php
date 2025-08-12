@@ -11,11 +11,9 @@ final readonly class DefaultEventHandler implements EventHandler
     public function handle(): callable
     {
         return static function (array $event): void {
-            // we HAVE to use to the EventSourcerer queue, it's what is calling fetchOneMessage!
-
-            $job = (new NewEventJob($event))->onConnection('eventsourcerer');
-
-            dispatch($job);
+            dispatch(
+                (new NewEventJob($event))->onConnection('eventsourcerer')
+            );
         };
     }
 }
