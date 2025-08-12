@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\FetchEvents;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
@@ -50,7 +49,8 @@ final class EventSourcererProvider extends ServiceProvider
         $manager = $this->app['queue'];
         $manager->addConnector('eventsourcerer', function() {
             return new EventSourcererConnector(
-                $this->app->make(Client::class)
+                $this->app->make(Client::class),
+                $this->app->make(EventHandler::class)
             );
         });
     }

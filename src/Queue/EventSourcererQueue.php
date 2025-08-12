@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
+use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
@@ -16,9 +17,10 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function __construct(
         private readonly Client $client,
-        private readonly ApplicationId $applicationId
+        private readonly ApplicationId $applicationId,
+        private readonly EventHandler $eventHandler
     ) {
-        $this->client->connect();
+        $this->client->connect()->listenForMessages($this->eventHandler->handle());
     }
 
     public function size($queue = null): int
