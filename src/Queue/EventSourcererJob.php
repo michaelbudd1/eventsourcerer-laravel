@@ -16,10 +16,12 @@ final class EventSourcererJob extends Job implements JobContract
 
     protected $connectionName;
 
-    private array $event;
+    private array               $event;
+    private EventSourcererQueue $queueObject;
 
     public function __construct(
         Container $container,
+        EventSourcererQueue $queueObject,
         string $payload,
         array $event,
         string $queue,
@@ -30,6 +32,7 @@ final class EventSourcererJob extends Job implements JobContract
         $this->event = $event;
         $this->container = $container;
         $this->connectionName = $connectionName;
+        $this->queueObject = $queueObject;
     }
 
     public function attempts(): int
@@ -45,5 +48,12 @@ final class EventSourcererJob extends Job implements JobContract
     public function getRawBody(): string
     {
         return $this->payload;
+    }
+
+    public function delete(): void
+    {
+        parent::delete();
+
+        $this->queueObject->removeFromQueue($this->event);
     }
 }

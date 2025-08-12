@@ -62,10 +62,16 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
         return new EventSourcererJob(
             $this->container,
+            $this,
             $this->createPayload(new NewEventJob($event), $queue),
             $event,
             $queue,
             self::CONNECTION_NAME
         );
+    }
+
+    public function removeFromQueue(array $event): void
+    {
+        $this->client->acknowledgeEvent($this->applicationId, $event);
     }
 }

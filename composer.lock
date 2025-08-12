@@ -278,12 +278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sorcerer-client.git",
-                "reference": "2a16eeb48f4a08615d634e35ff597ff248e7a03c"
+                "reference": "cb38b2ca804bde37c68155b9f2e305b962bd124a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/2a16eeb48f4a08615d634e35ff597ff248e7a03c",
-                "reference": "2a16eeb48f4a08615d634e35ff597ff248e7a03c",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/cb38b2ca804bde37c68155b9f2e305b962bd124a",
+                "reference": "cb38b2ca804bde37c68155b9f2e305b962bd124a",
                 "shasum": ""
             },
             "require": {
@@ -321,7 +321,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sorcerer-client/issues",
                 "source": "https://github.com/michaelbudd1/event-sorcerer-client/tree/main"
             },
-            "time": "2025-08-12T19:50:52+00:00"
+            "time": "2025-08-12T20:32:03+00:00"
         },
         {
             "name": "eventsourcerer/message-utilities",
@@ -2981,12 +2981,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "94fb6404fd96521977d11c309d91566d93cb83a6"
+                "reference": "57861c3e46d9c85d89b73588afae62049ceafc5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/94fb6404fd96521977d11c309d91566d93cb83a6",
-                "reference": "94fb6404fd96521977d11c309d91566d93cb83a6",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/57861c3e46d9c85d89b73588afae62049ceafc5e",
+                "reference": "57861c3e46d9c85d89b73588afae62049ceafc5e",
                 "shasum": ""
             },
             "require": {
@@ -3041,7 +3041,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-05T10:19:40+00:00"
+            "time": "2025-08-12T20:20:59+00:00"
         },
         {
             "name": "symfony/http-client",
@@ -3809,12 +3809,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "5517b388f434b10fa2b4ca9da1ddacca65b3b680"
+                "reference": "0bd6259067bf4e84c80056e45d8b5abc0621ce5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/5517b388f434b10fa2b4ca9da1ddacca65b3b680",
-                "reference": "5517b388f434b10fa2b4ca9da1ddacca65b3b680",
+                "url": "https://api.github.com/repos/symfony/process/zipball/0bd6259067bf4e84c80056e45d8b5abc0621ce5b",
+                "reference": "0bd6259067bf4e84c80056e45d8b5abc0621ce5b",
                 "shasum": ""
             },
             "require": {
@@ -3866,7 +3866,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-09T22:28:14+00:00"
+            "time": "2025-08-12T20:21:03+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -4049,12 +4049,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "d9994314b50d3bbeca1d06490bc54c0433d24a61"
+                "reference": "c008adceeae144e2467f37a0f82dfae4b0521463"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/d9994314b50d3bbeca1d06490bc54c0433d24a61",
-                "reference": "d9994314b50d3bbeca1d06490bc54c0433d24a61",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/c008adceeae144e2467f37a0f82dfae4b0521463",
+                "reference": "c008adceeae144e2467f37a0f82dfae4b0521463",
                 "shasum": ""
             },
             "require": {
@@ -4141,7 +4141,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-09T22:28:14+00:00"
+            "time": "2025-08-12T20:21:03+00:00"
         },
         {
             "name": "symfony/translation-contracts",
