@@ -12,7 +12,7 @@ use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
 final class RemoveEventFromQueue extends Command
 {
     public const string SIGNATURE_PREFIX = 'eventsourcerer:remove-event-from-queue';
-    protected $signature = self::SIGNATURE_PREFIX . ' {streamId} ';
+    protected $signature = self::SIGNATURE_PREFIX . ' {streamId} {streamCheckpoint} {allStreamCheckpoint}';
     protected $description = 'Remove event from queue';
 
     public function handle(Client $client): void
