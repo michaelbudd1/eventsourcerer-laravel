@@ -20,7 +20,7 @@ final class RemoveEventFromQueue extends Command
         $client
             ->connect()
             ->acknowledgeEvent(
-                StreamId::fromString($this->argument('*')),
+                StreamId::fromString('*'),
                 Checkpoint::fromString($this->argument('streamCheckpoint')),
                 Checkpoint::fromString($this->argument('allStreamCheckpoint'))
             );
