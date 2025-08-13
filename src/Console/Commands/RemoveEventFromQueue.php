@@ -25,8 +25,6 @@ final class RemoveEventFromQueue extends Command
                 Checkpoint::fromString($this->argument('allStreamCheckpoint'))
             );
 
-        $client->disconnect();
-
         $this->output->success('Event removed from queue');
     }
 }
