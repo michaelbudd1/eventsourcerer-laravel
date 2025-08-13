@@ -75,7 +75,8 @@ final class EventSourcererQueue extends Queue implements QueueContract
     {
         Process::start(
             sprintf(
-            RemoveEventFromQueue::SIGNATURE_PREFIX . ' %d %d',
+                'php artisan %s %d %d',
+                RemoveEventFromQueue::SIGNATURE_PREFIX,
                 $event['number'],
                 $event['allSequence']
             )
