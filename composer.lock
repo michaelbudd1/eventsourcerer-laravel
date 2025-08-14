@@ -278,12 +278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sorcerer-client.git",
-                "reference": "ee869589db86f7c2a3bd0b9dfc8f31de3a332cef"
+                "reference": "75f765b06ba59032f21cb20cab38feaff2407baa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/ee869589db86f7c2a3bd0b9dfc8f31de3a332cef",
-                "reference": "ee869589db86f7c2a3bd0b9dfc8f31de3a332cef",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/75f765b06ba59032f21cb20cab38feaff2407baa",
+                "reference": "75f765b06ba59032f21cb20cab38feaff2407baa",
                 "shasum": ""
             },
             "require": {
@@ -321,7 +321,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sorcerer-client/issues",
                 "source": "https://github.com/michaelbudd1/event-sorcerer-client/tree/main"
             },
-            "time": "2025-08-12T20:48:14+00:00"
+            "time": "2025-08-13T19:50:10+00:00"
         },
         {
             "name": "eventsourcerer/message-utilities",
@@ -329,12 +329,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sourcerer-message-utilities.git",
-                "reference": "44d5b153d61e4f3a2c66f5354184589ab16b4c1e"
+                "reference": "29584a1b2d94085b67378b69d87b1528e99df7f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sourcerer-message-utilities/zipball/44d5b153d61e4f3a2c66f5354184589ab16b4c1e",
-                "reference": "44d5b153d61e4f3a2c66f5354184589ab16b4c1e",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sourcerer-message-utilities/zipball/29584a1b2d94085b67378b69d87b1528e99df7f3",
+                "reference": "29584a1b2d94085b67378b69d87b1528e99df7f3",
                 "shasum": ""
             },
             "require": {
@@ -359,7 +359,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sourcerer-message-utilities/issues",
                 "source": "https://github.com/michaelbudd1/event-sourcerer-message-utilities/tree/main"
             },
-            "time": "2025-08-07T10:57:38+00:00"
+            "time": "2025-08-13T19:46:59+00:00"
         },
         {
             "name": "eventsourcerer/symfony-messenger-transport",
@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "43a149bd98638b2bdb9110dedf5711677d312b8c"
+                "reference": "d8bdd65850b99ac4f7ebee1a49ad678a6740bec9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/43a149bd98638b2bdb9110dedf5711677d312b8c",
-                "reference": "43a149bd98638b2bdb9110dedf5711677d312b8c",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/d8bdd65850b99ac4f7ebee1a49ad678a6740bec9",
+                "reference": "d8bdd65850b99ac4f7ebee1a49ad678a6740bec9",
                 "shasum": ""
             },
             "require": {
@@ -513,7 +513,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-08-11T14:48:56+00:00"
+            "time": "2025-08-13T02:18:00+00:00"
         },
         {
             "name": "illuminate/conditionable",
@@ -633,12 +633,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "a66f14174c15a14b645089c537b895217942e017"
+                "reference": "81d62ed4eef2d8d838cdf172aedcff2a78deaed0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/a66f14174c15a14b645089c537b895217942e017",
-                "reference": "a66f14174c15a14b645089c537b895217942e017",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/81d62ed4eef2d8d838cdf172aedcff2a78deaed0",
+                "reference": "81d62ed4eef2d8d838cdf172aedcff2a78deaed0",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-08-12T13:56:11+00:00"
+            "time": "2025-08-13T02:03:36+00:00"
         },
         {
             "name": "illuminate/contracts",
@@ -2811,12 +2811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "eac689892d91ac9695f2f3607799e8a726825bc4"
+                "reference": "0fe6c7fc33c2cf85fe8f78ea8916a01318b39261"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/eac689892d91ac9695f2f3607799e8a726825bc4",
-                "reference": "eac689892d91ac9695f2f3607799e8a726825bc4",
+                "url": "https://api.github.com/repos/symfony/console/zipball/0fe6c7fc33c2cf85fe8f78ea8916a01318b39261",
+                "reference": "0fe6c7fc33c2cf85fe8f78ea8916a01318b39261",
                 "shasum": ""
             },
             "require": {
@@ -2901,7 +2901,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-12T12:43:48+00:00"
+            "time": "2025-08-13T16:48:03+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3223,12 +3223,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/messenger.git",
-                "reference": "d986e4428f5990ca6332bbfeeb41f93c82a86a2f"
+                "reference": "60b52d3902deedbb74261461a7647527b5f77ea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/messenger/zipball/d986e4428f5990ca6332bbfeeb41f93c82a86a2f",
-                "reference": "d986e4428f5990ca6332bbfeeb41f93c82a86a2f",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/60b52d3902deedbb74261461a7647527b5f77ea0",
+                "reference": "60b52d3902deedbb74261461a7647527b5f77ea0",
                 "shasum": ""
             },
             "require": {
@@ -3260,7 +3260,8 @@
                 "symfony/serializer": "^6.4|^7.0|^8.0",
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/stopwatch": "^6.4|^7.0|^8.0",
-                "symfony/validator": "^6.4|^7.0|^8.0"
+                "symfony/validator": "^6.4|^7.0|^8.0",
+                "symfony/var-dumper": "^6.4|^7.0|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -3308,7 +3309,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-09T22:28:14+00:00"
+            "time": "2025-08-13T16:48:03+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -4049,12 +4050,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "c008adceeae144e2467f37a0f82dfae4b0521463"
+                "reference": "35a5449c935ed02e0cbf853fdc9866457610d1b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/c008adceeae144e2467f37a0f82dfae4b0521463",
-                "reference": "c008adceeae144e2467f37a0f82dfae4b0521463",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/35a5449c935ed02e0cbf853fdc9866457610d1b5",
+                "reference": "35a5449c935ed02e0cbf853fdc9866457610d1b5",
                 "shasum": ""
             },
             "require": {
@@ -4141,7 +4142,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-12T20:21:03+00:00"
+            "time": "2025-08-13T16:48:03+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -4228,12 +4229,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "a8277637163b02607692b6d9dd2174ffd77130e8"
+                "reference": "2c309a3d116ca38e96889740d3ea2a2c1d72e7c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/a8277637163b02607692b6d9dd2174ffd77130e8",
-                "reference": "a8277637163b02607692b6d9dd2174ffd77130e8",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/2c309a3d116ca38e96889740d3ea2a2c1d72e7c3",
+                "reference": "2c309a3d116ca38e96889740d3ea2a2c1d72e7c3",
                 "shasum": ""
             },
             "require": {
@@ -4301,7 +4302,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-09T22:28:14+00:00"
+            "time": "2025-08-13T13:43:36+00:00"
         },
         {
             "name": "voku/portable-ascii",
