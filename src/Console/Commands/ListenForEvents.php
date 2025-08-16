@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
 
-use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Illuminate\Console\Command;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 
@@ -14,8 +13,8 @@ final class ListenForEvents extends Command
     protected $signature = self::SIGNATURE;
     protected $description = 'Listens for events';
 
-    public function handle(Client $client, EventHandler $eventHandler): void
+    public function handle(Client $client): void
     {
-        $client->connect()->listenForMessages($eventHandler->handle());
+        $client->connect()->listenForMessages();
     }
 }
