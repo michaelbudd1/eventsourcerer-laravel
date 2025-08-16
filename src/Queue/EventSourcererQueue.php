@@ -34,8 +34,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function size($queue = null): int
     {
-        // we can't provide this
-        return 1;
+        return $this->client->availableEventsCount($this->applicationId);
     }
 
     public function push($job, $data = '', $queue = null): void
@@ -45,12 +44,11 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function pushRaw($payload, $queue = null, array $options = []): void
     {
-        // TODO: Implement pushRaw() method.
     }
 
     public function later($delay, $job, $data = '', $queue = null): void
     {
-        // TODO: Implement later() method.
+        $this->push($job, $data, $queue);
     }
 
     public function pop($queue = null): ?Job

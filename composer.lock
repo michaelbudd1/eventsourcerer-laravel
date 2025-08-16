@@ -278,12 +278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sorcerer-client.git",
-                "reference": "75f765b06ba59032f21cb20cab38feaff2407baa"
+                "reference": "7bd55cf35134d00fed3864c119cc89587873a4bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/75f765b06ba59032f21cb20cab38feaff2407baa",
-                "reference": "75f765b06ba59032f21cb20cab38feaff2407baa",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/7bd55cf35134d00fed3864c119cc89587873a4bd",
+                "reference": "7bd55cf35134d00fed3864c119cc89587873a4bd",
                 "shasum": ""
             },
             "require": {
@@ -321,7 +321,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sorcerer-client/issues",
                 "source": "https://github.com/michaelbudd1/event-sorcerer-client/tree/main"
             },
-            "time": "2025-08-13T19:50:10+00:00"
+            "time": "2025-08-16T19:52:15+00:00"
         },
         {
             "name": "eventsourcerer/message-utilities",
@@ -732,12 +732,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "6aedae5bd2e9d22dc74d1cbadf18490e3e0e7de5"
+                "reference": "87f67036e1bfbbbe2d57eec04ea2159ece14140a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/6aedae5bd2e9d22dc74d1cbadf18490e3e0e7de5",
-                "reference": "6aedae5bd2e9d22dc74d1cbadf18490e3e0e7de5",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/87f67036e1bfbbbe2d57eec04ea2159ece14140a",
+                "reference": "87f67036e1bfbbbe2d57eec04ea2159ece14140a",
                 "shasum": ""
             },
             "require": {
@@ -794,7 +794,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-08-12T14:22:24+00:00"
+            "time": "2025-08-15T13:58:12+00:00"
         },
         {
             "name": "illuminate/events",
@@ -1089,12 +1089,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "02b52c61a1eaa894e632aadbc168ed380b6d3597"
+                "reference": "dffee7182dc82a2b0b384e461059c9cad4272ed8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/02b52c61a1eaa894e632aadbc168ed380b6d3597",
-                "reference": "02b52c61a1eaa894e632aadbc168ed380b6d3597",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/dffee7182dc82a2b0b384e461059c9cad4272ed8",
+                "reference": "dffee7182dc82a2b0b384e461059c9cad4272ed8",
                 "shasum": ""
             },
             "require": {
@@ -1159,7 +1159,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-08-11T14:49:28+00:00"
+            "time": "2025-08-13T21:42:15+00:00"
         },
         {
             "name": "illuminate/view",
@@ -3810,12 +3810,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "0bd6259067bf4e84c80056e45d8b5abc0621ce5b"
+                "reference": "410c833558ad2c2275abf96095b4fe2e40102105"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/0bd6259067bf4e84c80056e45d8b5abc0621ce5b",
-                "reference": "0bd6259067bf4e84c80056e45d8b5abc0621ce5b",
+                "url": "https://api.github.com/repos/symfony/process/zipball/410c833558ad2c2275abf96095b4fe2e40102105",
+                "reference": "410c833558ad2c2275abf96095b4fe2e40102105",
                 "shasum": ""
             },
             "require": {
@@ -3867,7 +3867,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-12T20:21:03+00:00"
+            "time": "2025-08-14T09:54:45+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -3959,12 +3959,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "24b585b636430548109aceb3bd9a42a55ab9b65a"
+                "reference": "d7b049db34beb170451f60ab15e309247f88c977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/24b585b636430548109aceb3bd9a42a55ab9b65a",
-                "reference": "24b585b636430548109aceb3bd9a42a55ab9b65a",
+                "url": "https://api.github.com/repos/symfony/string/zipball/d7b049db34beb170451f60ab15e309247f88c977",
+                "reference": "d7b049db34beb170451f60ab15e309247f88c977",
                 "shasum": ""
             },
             "require": {
@@ -4042,7 +4042,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-12T12:49:34+00:00"
+            "time": "2025-08-14T15:39:15+00:00"
         },
         {
             "name": "symfony/translation",
