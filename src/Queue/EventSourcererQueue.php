@@ -6,12 +6,17 @@ namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent as WriteNewEventCommand;
+use Eventsourcerer\EventSourcererLaravel\Exception\QueueCannotProcessJob;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use Illuminate\Support\Facades\Process;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationId;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventName;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventVersion;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
 
 final class EventSourcererQueue extends Queue implements QueueContract
 {
@@ -24,14 +29,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
         Process::start(self::startServerCommand());
     }
 
-    private static function startServerCommand(): string
-    {
-        return sprintf(
-            'php artisan %s',
-            ListenForEvents::SIGNATURE
-        );
-    }
-
     public function size($queue = null): int
     {
         return $this->client->availableEventsCount($this->applicationId);
@@ -39,7 +36,18 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function push($job, $data = '', $queue = null): void
     {
-        // TODO: Implement push() method.
+        if (!($job instanceof WriteNewEvent)) {
+            throw QueueCannotProcessJob::becauseTheJobTypeIsInvalid($job::class);
+        }
+
+        Process::start(
+            self::writeEventCommand(
+                $job->streamId,
+                $job->eventName,
+                $job->eventVersion,
+                $job->payload
+            )
+        );
     }
 
     public function pushRaw($payload, $queue = null, array $options = []): void
@@ -78,6 +86,30 @@ final class EventSourcererQueue extends Queue implements QueueContract
                 $event['number'],
                 $event['allSequence']
             )
+        );
+    }
+
+    private static function startServerCommand(): string
+    {
+        return sprintf(
+            'php artisan %s',
+            ListenForEvents::SIGNATURE
+        );
+    }
+
+    private static function writeEventCommand(
+        StreamId $streamId,
+        EventName $eventName,
+        EventVersion $eventVersion,
+        array $payload
+    ): string {
+        return sprintf(
+            'php artisan %s %s %s %s %s',
+            WriteNewEventCommand::SIGNATURE,
+            $streamId,
+            $eventName,
+            $eventVersion,
+            json_encode($payload, JSON_THROW_ON_ERROR)
         );
     }
 }

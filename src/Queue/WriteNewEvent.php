@@ -13,19 +13,14 @@ use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
 final readonly class WriteNewEvent implements ShouldQueue
 {
     public function __construct(
-        private StreamId $streamId,
-        private EventName $eventName,
-        private EventVersion $eventVersion,
-        private array $payload
+        public StreamId $streamId,
+        public EventName $eventName,
+        public EventVersion $eventVersion,
+        public array $payload
     ) {}
 
-    public function handle(Client $client): void
+    public function handle(): void
     {
-        $client->writeNewEvent(
-            $this->streamId,
-            $this->eventName,
-            $this->eventVersion,
-            $this->payload
-        );
+        // serves as DTO only
     }
 }

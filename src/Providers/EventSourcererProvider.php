@@ -9,6 +9,7 @@ use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
+use Eventsourcerer\EventSourcererLaravel\Queue\WriteNewEvent;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
@@ -59,6 +60,7 @@ final class EventSourcererProvider extends ServiceProvider
             $this->commands([
                 ListenForEvents::class,
                 RemoveEventFromQueue::class,
+                WriteNewEvent::class,
             ]);
         }
     }
