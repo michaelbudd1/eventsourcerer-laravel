@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\Job as JobContract;
 use Illuminate\Queue\Jobs\Job;
 
-final class EventSourcererJob extends Job implements JobContract
+class EventSourcererJob extends Job implements JobContract
 {
     protected $job;
 
