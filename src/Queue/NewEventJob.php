@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-final readonly class NewEventJob implements ShouldQueue, ShouldBeUnique
+final class NewEventJob implements ShouldQueue, ShouldBeUnique
 {
     use Queueable;
 
