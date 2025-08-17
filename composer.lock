@@ -278,12 +278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sorcerer-client.git",
-                "reference": "7bd55cf35134d00fed3864c119cc89587873a4bd"
+                "reference": "dd947e8846e5b31c15fb4b57f490b37ffd59d243"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/7bd55cf35134d00fed3864c119cc89587873a4bd",
-                "reference": "7bd55cf35134d00fed3864c119cc89587873a4bd",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sorcerer-client/zipball/dd947e8846e5b31c15fb4b57f490b37ffd59d243",
+                "reference": "dd947e8846e5b31c15fb4b57f490b37ffd59d243",
                 "shasum": ""
             },
             "require": {
@@ -321,7 +321,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sorcerer-client/issues",
                 "source": "https://github.com/michaelbudd1/event-sorcerer-client/tree/main"
             },
-            "time": "2025-08-16T19:52:15+00:00"
+            "time": "2025-08-17T08:11:32+00:00"
         },
         {
             "name": "eventsourcerer/message-utilities",
@@ -329,12 +329,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaelbudd1/event-sourcerer-message-utilities.git",
-                "reference": "29584a1b2d94085b67378b69d87b1528e99df7f3"
+                "reference": "78d9469d9fa54d7a46971eaeae2e98167624f352"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelbudd1/event-sourcerer-message-utilities/zipball/29584a1b2d94085b67378b69d87b1528e99df7f3",
-                "reference": "29584a1b2d94085b67378b69d87b1528e99df7f3",
+                "url": "https://api.github.com/repos/michaelbudd1/event-sourcerer-message-utilities/zipball/78d9469d9fa54d7a46971eaeae2e98167624f352",
+                "reference": "78d9469d9fa54d7a46971eaeae2e98167624f352",
                 "shasum": ""
             },
             "require": {
@@ -359,7 +359,7 @@
                 "issues": "https://github.com/michaelbudd1/event-sourcerer-message-utilities/issues",
                 "source": "https://github.com/michaelbudd1/event-sourcerer-message-utilities/tree/main"
             },
-            "time": "2025-08-13T19:46:59+00:00"
+            "time": "2025-08-17T08:10:05+00:00"
         },
         {
             "name": "eventsourcerer/symfony-messenger-transport",

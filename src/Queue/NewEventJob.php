@@ -8,11 +8,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewEventJob implements ShouldQueue, ShouldBeUnique
+final readonly class NewEventJob implements ShouldQueue, ShouldBeUnique
 {
     use Queueable;
 
-    public function __construct(private readonly array $event) {}
+    public function __construct(private array $event) {}
 
     public function handle(): void
     {
