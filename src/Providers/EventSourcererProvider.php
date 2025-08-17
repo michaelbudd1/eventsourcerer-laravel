@@ -6,10 +6,10 @@ namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
-use Eventsourcerer\EventSourcererLaravel\Queue\WriteNewEvent;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
