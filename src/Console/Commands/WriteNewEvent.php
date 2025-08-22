@@ -6,14 +6,15 @@ namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
 
 use Illuminate\Console\Command;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
-use PearTreeWebLtd\EventSourcererMessageUtilities\Model\Checkpoint;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventName;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventVersion;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
 
 final class WriteNewEvent extends Command
 {
-    public const string SIGNATURE = 'eventsourcerer:write-new-event';
+    public const string SIGNATURE_PREFIX = 'eventsourcerer:write-new-event ';
 
-    protected $signature = self::SIGNATURE;
+    protected $signature = self::SIGNATURE_PREFIX . ' {streamId} {eventName} {eventVersion} {payload}';
 
     protected $description = 'Writes new event';
 
@@ -23,10 +24,11 @@ final class WriteNewEvent extends Command
             ->connect()
             ->writeNewEvent(
                 StreamId::fromString('*'),
-                Checkpoint::fromString($this->argument('streamCheckpoint')),
-                Checkpoint::fromString($this->argument('allStreamCheckpoint'))
+                EventName::fromString($this->argument('eventName')),
+                EventVersion::fromString($this->argument('eventVersion')),
+                $this->argument('payload')
             );
 
-        $this->output->success('Event removed from queue');
+        $this->output->success('New event written');
     }
 }
