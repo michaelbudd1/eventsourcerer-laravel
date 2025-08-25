@@ -104,7 +104,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
         array $payload
     ): string {
         return sprintf(
-            'php artisan %s %s %s %s %s',
+            'php artisan %s %s %s %s \'%s\'',
             WriteNewEventCommand::SIGNATURE_PREFIX,
             $streamId,
             $eventName,
