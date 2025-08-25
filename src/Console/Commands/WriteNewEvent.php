@@ -26,7 +26,7 @@ final class WriteNewEvent extends Command
                 StreamId::fromString('*'),
                 EventName::fromString($this->argument('eventName')),
                 EventVersion::fromString($this->argument('eventVersion')),
-                $this->argument('payload')
+                json_decode($this->argument('payload'), false, 512, JSON_THROW_ON_ERROR)
             );
 
         $this->output->success('New event written');
