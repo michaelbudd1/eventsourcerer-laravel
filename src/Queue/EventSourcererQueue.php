@@ -61,7 +61,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function pop($queue = null): ?Job
     {
-        $event = $this->client->fetchOneMessage($this->applicationId);
+        $event = $this->client->fetchOneMessage();
 
         if (null === $event) {
             return null;
