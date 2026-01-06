@@ -11,9 +11,8 @@ use Eventsourcerer\EventSourcererLaravel\Exception\QueueCannotProcessJob;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Process;
-use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
-use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationId;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventName;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventVersion;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
@@ -22,11 +21,9 @@ final class EventSourcererQueue extends Queue implements QueueContract
 {
     private const string CONNECTION_NAME = 'eventsourcerer';
 
-    public function __construct(
-        private readonly Client $client,
-        private readonly ApplicationId $applicationId
-    ) {
-        Process::start(self::startServerCommand());
+    public function __construct()
+    {
+        Process::start(self::startListenerCommand());
     }
 
     public function size($queue = null): int
@@ -61,20 +58,27 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function pop($queue = null): ?Job
     {
-        $event = $this->client->fetchOneMessage();
+        $events = Cache::get(ListenForEvents::EVENTS_CACHE_KEY, []);
+        $reversed = array_reverse($events);
+        $event = array_pop($reversed);
 
-        if (null === $event) {
-            return null;
+        if (null !== $event) {
+            unset($events[$event['allSequence']]);
+
+            Cache::set(ListenForEvents::EVENTS_CACHE_KEY, $events);
+
+            dd('yay!', $event);
+            return new EventSourcererJob(
+                $this->container,
+                $this,
+                $this->createPayload(new NewEventJob($event), $queue),
+                $event,
+                $queue,
+                self::CONNECTION_NAME
+            );
         }
 
-        return new EventSourcererJob(
-            $this->container,
-            $this,
-            $this->createPayload(new NewEventJob($event), $queue),
-            $event,
-            $queue,
-            self::CONNECTION_NAME
-        );
+        return null;
     }
 
     public function removeFromQueue(array $event): void
@@ -89,7 +93,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
         );
     }
 
-    private static function startServerCommand(): string
+    private static function startListenerCommand(): string
     {
         return sprintf(
             'php artisan %s',

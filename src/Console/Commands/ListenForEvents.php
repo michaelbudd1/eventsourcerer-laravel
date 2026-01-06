@@ -12,7 +12,7 @@ use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 final class ListenForEvents extends Command
 {
     public const string SIGNATURE = 'eventsourcerer:listen-for-events';
-    private const string EVENTS_CACHE_KEY = 'events';
+    public const string EVENTS_CACHE_KEY = 'events';
 
     protected $signature = self::SIGNATURE;
     protected $description = 'Listens for events';
@@ -25,12 +25,11 @@ final class ListenForEvents extends Command
     private static function handleNewEvents(): callable
     {
         return static function (array $decodedEvent): void {
-            var_dump($decodedEvent); die;
-//            $events = Cache::get(self::EVENTS_CACHE_KEY, []);
-//
-//            $events[$decodedEvent['allSequence']] = $decodedEvent;
-//
-//            Cache::set(self::EVENTS_CACHE_KEY, $events);
+            $events = Cache::get(self::EVENTS_CACHE_KEY, []);
+
+            $events[$decodedEvent['allSequence']] = $decodedEvent;
+
+            Cache::set(self::EVENTS_CACHE_KEY, $events);
         };
     }
 }
