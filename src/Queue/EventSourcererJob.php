@@ -16,7 +16,7 @@ class EventSourcererJob extends Job implements JobContract
 
     protected $connectionName;
 
-    private array               $event;
+    private array $event;
     private EventSourcererQueue $queueObject;
 
     public function __construct(
