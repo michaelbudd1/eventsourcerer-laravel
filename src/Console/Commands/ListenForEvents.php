@@ -7,6 +7,7 @@ namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 
 final class ListenForEvents extends Command
 {
@@ -18,17 +19,18 @@ final class ListenForEvents extends Command
 
     public function handle(Client $client): void
     {
-        $client->catchup(self::handleNewEvents());
+        $client->catchup(WorkerId::fromString('test'), self::handleNewEvents());
     }
 
     private static function handleNewEvents(): callable
     {
         return static function (array $decodedEvent): void {
-            $events = Cache::get(self::EVENTS_CACHE_KEY, []);
-
-            $events[$decodedEvent['allSequence']] = $decodedEvent;
-
-            Cache::set(self::EVENTS_CACHE_KEY, $events);
+            var_dump($decodedEvent); die;
+//            $events = Cache::get(self::EVENTS_CACHE_KEY, []);
+//
+//            $events[$decodedEvent['allSequence']] = $decodedEvent;
+//
+//            Cache::set(self::EVENTS_CACHE_KEY, $events);
         };
     }
 }
