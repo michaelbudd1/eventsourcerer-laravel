@@ -29,7 +29,8 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function size($queue = null): int
     {
-        return $this->workerEvents->countFor();
+        return 0;
+//        return $this->workerEvents->countFor();
     }
 
     public function push($job, $data = '', $queue = null): void
