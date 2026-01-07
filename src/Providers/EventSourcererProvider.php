@@ -10,6 +10,8 @@ use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
+use Eventsourcerer\EventSourcererLaravel\Repository\CacheWorkerEvents;
+use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
@@ -31,9 +33,8 @@ final class EventSourcererProvider extends ServiceProvider
             );
         });
 
-        $this->app->singleton(EventHandler::class, static function () {
-            return new DefaultEventHandler();
-        });
+        $this->app->singleton(EventHandler::class, static fn () => new DefaultEventHandler());
+        $this->app->singleton(WorkerEvents::class, static fn () => new CacheWorkerEvents());
     }
 
     public function boot(): void

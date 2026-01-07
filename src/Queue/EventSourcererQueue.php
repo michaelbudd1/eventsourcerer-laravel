@@ -8,6 +8,7 @@ use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent as WriteNewEventCommand;
 use Eventsourcerer\EventSourcererLaravel\Exception\QueueCannotProcessJob;
+use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
@@ -21,14 +22,14 @@ final class EventSourcererQueue extends Queue implements QueueContract
 {
     private const string CONNECTION_NAME = 'eventsourcerer';
 
-    public function __construct()
+    public function __construct(private readonly WorkerEvents $workerEvents)
     {
         Process::start(self::startListenerCommand());
     }
 
     public function size($queue = null): int
     {
-        return 0; //$this->client->availableEventsCount($this->applicationId);
+        return $this->workerEvents->countFor();
     }
 
     public function push($job, $data = '', $queue = null): void
@@ -67,7 +68,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
             Cache::set(ListenForEvents::EVENTS_CACHE_KEY, $events);
 
-            dd('yay!', $event);
             return new EventSourcererJob(
                 $this->container,
                 $this,

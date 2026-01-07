@@ -4,32 +4,27 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
 
+use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 
 final class ListenForEvents extends Command
 {
     public const string SIGNATURE = 'eventsourcerer:listen-for-events';
-    public const string EVENTS_CACHE_KEY = 'events';
 
     protected $signature = self::SIGNATURE;
     protected $description = 'Listens for events';
 
-    public function handle(Client $client): void
+    public function handle(Client $client, WorkerEvents $workerEvents): void
     {
-        $client->catchup(WorkerId::fromString('test'), self::handleNewEvents());
+        $client->catchup(WorkerId::fromString('test'), self::handleNewEvents($workerEvents));
     }
 
-    private static function handleNewEvents(): callable
+    private static function handleNewEvents(WorkerEvents $workerEvents): callable
     {
-        return static function (array $decodedEvent): void {
-            $events = Cache::get(self::EVENTS_CACHE_KEY, []);
-
-            $events[$decodedEvent['allSequence']] = $decodedEvent;
-
-            Cache::set(self::EVENTS_CACHE_KEY, $events);
+        return static function (array $decodedEvent) use ($workerEvents): void {
+            $workerEvents->add($decodedEvent);
         };
     }
 }
