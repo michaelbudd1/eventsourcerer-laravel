@@ -24,7 +24,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function __construct(private readonly WorkerEvents $workerEvents)
     {
-        dd($this->getConnectionName());
         Process::start(self::startListenerCommand());
     }
 
@@ -62,6 +61,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
     public function pop($queue = null): ?Job
     {
 //        $event = $this->workerEvents->pop();
+        dd($this->getConnectionName());
 
         $events = Cache::get(ListenForEvents::EVENTS_CACHE_KEY, []);
         $reversed = array_reverse($events);
