@@ -18,8 +18,7 @@ final class ListenForEvents extends Command
 
     public function handle(Client $client, WorkerEvents $workerEvents): void
     {
-        dd($this->argument('worker'));
-        $client->catchup(WorkerId::fromString('test'), self::handleNewEvents($workerEvents));
+        $client->catchup(WorkerId::fromString($this->argument('worker')), self::handleNewEvents($workerEvents));
     }
 
     private static function handleNewEvents(WorkerEvents $workerEvents): callable

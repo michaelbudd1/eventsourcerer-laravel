@@ -15,7 +15,7 @@ final readonly class CacheWorkerEvents implements WorkerEvents
     {
         $events = Cache::get(self::EVENTS_CACHE_KEY, []);
 
-        $events[$event['allSequence']] = $event;
+        $events[$event['workerId']][$event['allSequence']] = $event;
 
         Cache::set(self::EVENTS_CACHE_KEY, $events);
     }
@@ -24,13 +24,22 @@ final readonly class CacheWorkerEvents implements WorkerEvents
     {
         $events = Cache::get(self::EVENTS_CACHE_KEY, []);
 
-        unset($events[$event['allSequence']]);
+        unset($events[$event['workerId']][$event['allSequence']]);
 
         Cache::set(self::EVENTS_CACHE_KEY, $events);
     }
 
     public function countFor(WorkerId $workerId): int
     {
-        return count(Cache::get(self::EVENTS_CACHE_KEY, []));
+        return count(Cache::get(self::EVENTS_CACHE_KEY, [])[$workerId->toString()] ?? []);
+    }
+
+    public function popFor(WorkerId $workerId): ?array
+    {
+        $events = Cache::get(self::EVENTS_CACHE_KEY, [])[$workerId->toString()] ?? [];
+
+        $reversed = array_reverse($events);
+
+        return array_pop($reversed);
     }
 }

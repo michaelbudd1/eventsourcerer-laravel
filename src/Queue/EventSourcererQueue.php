@@ -17,20 +17,23 @@ use Illuminate\Support\Facades\Process;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventName;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventVersion;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 
 final class EventSourcererQueue extends Queue implements QueueContract
 {
     private const string CONNECTION_NAME = 'eventsourcerer';
+    private WorkerId $workerId;
 
     public function __construct(private readonly WorkerEvents $workerEvents)
     {
-        Process::start(self::startListenerCommand());
+        $this->workerId = self::workerId();
+
+        Process::start($this->startListenerCommand());
     }
 
     public function size($queue = null): int
     {
-        return 0;
-//        return $this->workerEvents->countFor();
+        return $this->workerEvents->countFor($this->workerId);
     }
 
     public function push($job, $data = '', $queue = null): void
@@ -60,8 +63,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function pop($queue = null): ?Job
     {
-//        $event = $this->workerEvents->pop();
-        dd($this->getConnectionName());
+        $event = $this->workerEvents->pop($this->workerId);
 
         $events = Cache::get(ListenForEvents::EVENTS_CACHE_KEY, []);
         $reversed = array_reverse($events);
@@ -97,12 +99,12 @@ final class EventSourcererQueue extends Queue implements QueueContract
         );
     }
 
-    private static function startListenerCommand(): string
+    private function startListenerCommand(): string
     {
         return sprintf(
             'php artisan %s %s',
             ListenForEvents::SIGNATURE,
-            self::workerName(),
+            $this->workerId,
         );
     }
 
@@ -122,11 +124,10 @@ final class EventSourcererQueue extends Queue implements QueueContract
         );
     }
 
-    private static function workerName(): string
+    private static function workerId(): WorkerId
     {
-        return sprintf(
-            'worker-%s',
-            random_bytes(5)
+        return WorkerId::fromString(
+            sprintf('worker-%s', random_bytes(5))
         );
     }
 }

@@ -19,4 +19,6 @@ interface WorkerEvents
     public function remove(array $event): void;
 
     public function countFor(WorkerId $workerId): int;
+
+    public function popFor(WorkerId $workerId): ?array;
 }
