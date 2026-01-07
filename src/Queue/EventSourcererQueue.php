@@ -24,6 +24,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function __construct(private readonly WorkerEvents $workerEvents)
     {
+        dd($this->getConnectionName());
         Process::start(self::startListenerCommand());
     }
 

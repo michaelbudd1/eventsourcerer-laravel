@@ -16,7 +16,6 @@ final readonly class EventSourcererConnector implements ConnectorInterface
      */
     public function connect(array $config): EventSourcererQueue
     {
-        dd($config);
         return new EventSourcererQueue($this->workerEvents);
     }
 }
