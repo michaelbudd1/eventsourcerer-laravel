@@ -11,13 +11,14 @@ use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 
 final class ListenForEvents extends Command
 {
-    public const string SIGNATURE = 'eventsourcerer:listen-for-events';
+    public const string SIGNATURE = 'eventsourcerer:listen-for-events {worker}';
 
     protected $signature = self::SIGNATURE;
     protected $description = 'Listens for events';
 
     public function handle(Client $client, WorkerEvents $workerEvents): void
     {
+        dd($this->argument('worker'));
         $client->catchup(WorkerId::fromString('test'), self::handleNewEvents($workerEvents));
     }
 

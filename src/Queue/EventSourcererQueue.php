@@ -100,8 +100,9 @@ final class EventSourcererQueue extends Queue implements QueueContract
     private static function startListenerCommand(): string
     {
         return sprintf(
-            'php artisan %s',
-            ListenForEvents::SIGNATURE
+            'php artisan %s %s',
+            ListenForEvents::SIGNATURE,
+            self::workerName(),
         );
     }
 
@@ -118,6 +119,14 @@ final class EventSourcererQueue extends Queue implements QueueContract
             $eventName,
             $eventVersion,
             '\'' . json_encode($payload, JSON_THROW_ON_ERROR) . '\''
+        );
+    }
+
+    private static function workerName(): string
+    {
+        return sprintf(
+            'worker-%s',
+            random_bytes(5)
         );
     }
 }
