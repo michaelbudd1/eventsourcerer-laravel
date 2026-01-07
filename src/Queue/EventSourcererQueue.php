@@ -61,6 +61,8 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function pop($queue = null): ?Job
     {
+//        $event = $this->workerEvents->pop();
+
         $events = Cache::get(ListenForEvents::EVENTS_CACHE_KEY, []);
         $reversed = array_reverse($events);
         $event = array_pop($reversed);
