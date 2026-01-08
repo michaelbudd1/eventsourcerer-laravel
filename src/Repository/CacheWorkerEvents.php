@@ -40,6 +40,14 @@ final readonly class CacheWorkerEvents implements WorkerEvents
 
         $reversed = array_reverse($events);
 
-        return array_pop($reversed);
+        $event = array_pop($reversed);
+
+        if (null !== $event) {
+            unset($events[$workerId->toString()][$event['allSequence']]);
+
+            Cache::set(self::EVENTS_CACHE_KEY, $events);
+        }
+
+        return $event;
     }
 }
