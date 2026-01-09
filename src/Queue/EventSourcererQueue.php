@@ -26,7 +26,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
     public function __construct(private readonly WorkerEvents $workerEvents)
     {
         $this->workerId = self::workerId();
-dd($this->startListenerCommand());
+
         Process::start($this->startListenerCommand());
     }
 
@@ -120,7 +120,7 @@ dd($this->startListenerCommand());
     private static function workerId(): WorkerId
     {
         return WorkerId::fromString(
-            sprintf('worker-%s', random_bytes(5))
+            sprintf('worker-%s', bin2hex(random_bytes(5)))
         );
     }
 }
