@@ -26,7 +26,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
     public function __construct(private readonly WorkerEvents $workerEvents)
     {
         $this->workerId = self::workerId();
-
+dd($this->startListenerCommand());
         Process::start($this->startListenerCommand());
     }
 
