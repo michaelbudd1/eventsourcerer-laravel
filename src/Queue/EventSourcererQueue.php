@@ -92,11 +92,13 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     private function startListenerCommand(): string
     {
-        return sprintf(
-            'php artisan %s %s',
-            ListenForEvents::SIGNATURE,
-            $this->workerId,
+        $signature = str_replace(
+            '{worker}',
+            $this->workerId->toString(),
+            ListenForEvents::SIGNATURE
         );
+
+        return sprintf('php artisan %s', $signature);
     }
 
     private static function writeEventCommand(
