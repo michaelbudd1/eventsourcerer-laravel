@@ -12,7 +12,6 @@ use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Process;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventName;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventVersion;
