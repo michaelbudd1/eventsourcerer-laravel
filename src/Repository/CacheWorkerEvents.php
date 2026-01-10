@@ -36,18 +36,26 @@ final readonly class CacheWorkerEvents implements WorkerEvents
 
     public function popFor(WorkerId $workerId): ?array
     {
-        $events = Cache::get(self::EVENTS_CACHE_KEY, [])[$workerId->toString()] ?? [];
+        $allEvents = Cache::get(self::EVENTS_CACHE_KEY, []);
+        $events = $allEvents[$workerId->toString()] ?? [];
+        $keys = array_keys($events);
+        $lowest = min($keys);
+        $event = $events[$lowest];
 
-        $reversed = array_reverse($events);
-
-        $event = array_pop($reversed);
+//        dd($keys, $lowest, $event);
+//            $event[$lowest]);
 
         if (null !== $event) {
-            unset($events[$workerId->toString()][$event['allSequence']]);
+            unset($allEvents[$workerId->toString()][$lowest]);
 
-            Cache::set(self::EVENTS_CACHE_KEY, $events);
+            Cache::set(self::EVENTS_CACHE_KEY, $allEvents);
         }
 
         return $event;
+    }
+
+    public function allFor(WorkerId $workerId): array
+    {
+        return Cache::get(self::EVENTS_CACHE_KEY, [])[$workerId->toString()] ?? [];
     }
 }

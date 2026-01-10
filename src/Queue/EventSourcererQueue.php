@@ -13,6 +13,8 @@ use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use Illuminate\Support\Facades\Process;
+use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
+use PearTreeWebLtd\EventSourcererMessageUtilities\Model\Checkpoint;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventName;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\EventVersion;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\StreamId;
@@ -23,11 +25,22 @@ final class EventSourcererQueue extends Queue implements QueueContract
     private const string CONNECTION_NAME = 'eventsourcerer';
     private WorkerId $workerId;
 
-    public function __construct(private readonly WorkerEvents $workerEvents)
-    {
+    /**
+     * @var resource
+     */
+    private $localConnection;
+
+    public function __construct(
+        private readonly WorkerEvents $workerEvents,
+        private readonly Client $client,
+    ) {
         $this->workerId = self::workerId();
 
         Process::start($this->startListenerCommand());
+
+        sleep(1);
+
+        $this->localConnection = $this->client->createLocalConnection();
     }
 
     public function size($queue = null): int
@@ -65,6 +78,22 @@ final class EventSourcererQueue extends Queue implements QueueContract
         $event = $this->workerEvents->popFor($this->workerId);
 
         if (null !== $event) {
+//            dump(
+//                sprintf(
+//                    'dispatched job with sequence %d',
+//                    $event['number']
+//                )
+//            );
+
+            $this->client->acknowledgeEvent(
+                StreamId::fromString($event['stream']),
+                StreamId::fromString($event['catchupRequestStream']),
+                $this->workerId,
+                Checkpoint::fromInt($event['number']),
+                Checkpoint::fromInt($event['allSequence']),
+                $this->localConnection
+            );
+
             return new EventSourcererJob(
                 $this->container,
                 $this,

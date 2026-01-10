@@ -46,7 +46,8 @@ final class EventSourcererProvider extends ServiceProvider
         $manager = $this->app['queue'];
         $manager->addConnector('eventsourcerer', function() {
             return new EventSourcererConnector(
-                $this->app->make(WorkerEvents::class)
+                $this->app->make(WorkerEvents::class),
+                $this->app->make(Client::class),
             );
         });
 

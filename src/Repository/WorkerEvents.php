@@ -21,4 +21,6 @@ interface WorkerEvents
     public function countFor(WorkerId $workerId): int;
 
     public function popFor(WorkerId $workerId): ?array;
+
+    public function allFor(WorkerId $workerId): array;
 }
