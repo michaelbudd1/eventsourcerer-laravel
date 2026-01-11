@@ -78,22 +78,6 @@ final class EventSourcererQueue extends Queue implements QueueContract
         $event = $this->workerEvents->popFor($this->workerId);
 
         if (null !== $event) {
-//            dump(
-//                sprintf(
-//                    'dispatched job with sequence %d',
-//                    $event['number']
-//                )
-//            );
-
-            $this->client->acknowledgeEvent(
-                StreamId::fromString($event['stream']),
-                StreamId::fromString($event['catchupRequestStream']),
-                $this->workerId,
-                Checkpoint::fromInt($event['number']),
-                Checkpoint::fromInt($event['allSequence']),
-                $this->localConnection
-            );
-
             return new EventSourcererJob(
                 $this->container,
                 $this,
@@ -109,13 +93,13 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function removeFromQueue(array $event): void
     {
-        Process::start(
-            sprintf(
-                'php artisan %s %d %d',
-                RemoveEventFromQueue::SIGNATURE_PREFIX,
-                $event['number'],
-                $event['allSequence']
-            )
+        $this->client->acknowledgeEvent(
+            StreamId::fromString($event['stream']),
+            StreamId::fromString($event['catchupRequestStream']),
+            $this->workerId,
+            Checkpoint::fromInt($event['number']),
+            Checkpoint::fromInt($event['allSequence']),
+            $this->localConnection
         );
     }
 

@@ -39,11 +39,13 @@ final readonly class CacheWorkerEvents implements WorkerEvents
         $allEvents = Cache::get(self::EVENTS_CACHE_KEY, []);
         $events = $allEvents[$workerId->toString()] ?? [];
         $keys = array_keys($events);
+
+        if (empty($keys)) {
+            return null;
+        }
+
         $lowest = min($keys);
         $event = $events[$lowest];
-
-//        dd($keys, $lowest, $event);
-//            $event[$lowest]);
 
         if (null !== $event) {
             unset($allEvents[$workerId->toString()][$lowest]);
