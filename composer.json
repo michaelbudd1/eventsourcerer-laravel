@@ -27,5 +27,11 @@
             ]
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/Users/michaelbudd/Sites/event-sourcerer-client"
+        }
+    ],
     "minimum-stability": "dev"
 }

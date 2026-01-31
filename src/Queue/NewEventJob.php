@@ -6,6 +6,7 @@ namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Carbon;
 
 final class NewEventJob implements ShouldQueue
 {
@@ -28,15 +29,18 @@ final class NewEventJob implements ShouldQueue
 
     public function handle(): void
     {
-        dump(
-            sprintf(
-                'Received event from stream "%s"; with type "%s"; with sequence "%d"',
-                $this->event['stream'],
-                $this->event['name'],
-                $this->event['number']
-            )
+        $message = sprintf(
+            'Received event from stream "%s"; with type "%s"; with sequence "%d" and ALL sequence "%d"',
+            $this->event['stream'],
+            $this->event['name'],
+            $this->event['number'],
+            $this->event['allSequence']
         );
 
-        sleep(2);
+        $logFile = sprintf('worked-%s-%s.log', $this->event['workerId'], Carbon::now()->format('Ymd'));
+
+        $fh = fopen(storage_path($logFile), 'a+');
+        fwrite($fh, $message . PHP_EOL);
+        fclose($fh);
     }
 }

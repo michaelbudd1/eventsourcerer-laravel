@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Eventsourcerer\EventSourcererLaravel\Queue;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\RemoveEventFromQueue;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent as WriteNewEventCommand;
 use Eventsourcerer\EventSourcererLaravel\Exception\QueueCannotProcessJob;
 use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Contracts\Queue\Job;
-use Illuminate\Queue\Queue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
+use Illuminate\Queue\Queue;
 use Illuminate\Support\Facades\Process;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\Checkpoint;
@@ -23,6 +22,10 @@ use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 final class EventSourcererQueue extends Queue implements QueueContract
 {
     private const string CONNECTION_NAME = 'eventsourcerer';
+    private const int MAX_ATTEMPTS_TO_ESTABLISH_LOCAL_CONNECTION = 30;
+    private const int ONE_HUNDRED_MILLISECONDS_IN_MICROSECONDS = 100_000;
+    private const  int NUMBER_OF_CHARS_FOR_RANDOM_WORKER_ID = 5;
+
     private WorkerId $workerId;
 
     /**
@@ -36,9 +39,8 @@ final class EventSourcererQueue extends Queue implements QueueContract
     ) {
         $this->workerId = self::workerId();
 
-        Process::start($this->startListenerCommand());
-
-        sleep(1);
+        $this->startListenerCommand();
+        $this->waitForSocket();
 
         $this->localConnection = $this->client->createLocalConnection();
     }
@@ -93,9 +95,15 @@ final class EventSourcererQueue extends Queue implements QueueContract
 
     public function removeFromQueue(array $event): void
     {
+        if (!is_resource($this->localConnection) || feof($this->localConnection)) {
+            $this->localConnection = $this->client->createLocalConnection();
+
+            sleep(1);
+        }
+
         $this->client->acknowledgeEvent(
             StreamId::fromString($event['stream']),
-            StreamId::fromString($event['catchupRequestStream']),
+            StreamId::fromString($event['catchupRequestStream'] ?? $event['stream']),
             $this->workerId,
             Checkpoint::fromInt($event['number']),
             Checkpoint::fromInt($event['allSequence']),
@@ -103,7 +111,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
         );
     }
 
-    private function startListenerCommand(): string
+    private function startListenerCommand(): void
     {
         $signature = str_replace(
             '{worker}',
@@ -111,7 +119,9 @@ final class EventSourcererQueue extends Queue implements QueueContract
             ListenForEvents::SIGNATURE
         );
 
-        return sprintf('php artisan %s', $signature);
+        $command = sprintf('php artisan %s', $signature);
+
+        Process::start($command);
     }
 
     private static function writeEventCommand(
@@ -133,7 +143,26 @@ final class EventSourcererQueue extends Queue implements QueueContract
     private static function workerId(): WorkerId
     {
         return WorkerId::fromString(
-            sprintf('worker-%s', bin2hex(random_bytes(5)))
+            sprintf('worker-%s', bin2hex(random_bytes(self::NUMBER_OF_CHARS_FOR_RANDOM_WORKER_ID)))
         );
+    }
+    
+    private function waitForSocket(): void
+    {
+        $maxAttempts = self::MAX_ATTEMPTS_TO_ESTABLISH_LOCAL_CONNECTION;
+        $attempt = 0;
+        
+        while ($attempt < $maxAttempts) {
+            if (file_exists(Client::IPC_URI)) {
+                usleep(self::ONE_HUNDRED_MILLISECONDS_IN_MICROSECONDS);
+
+                return;
+            }
+            
+            usleep(self::ONE_HUNDRED_MILLISECONDS_IN_MICROSECONDS);
+            $attempt++;
+        }
+        
+        throw new \RuntimeException('Listener socket did not become available within 30 seconds');
     }
 }

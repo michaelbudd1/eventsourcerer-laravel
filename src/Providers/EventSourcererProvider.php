@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
+use Eventsourcerer\EventSourcererLaravel\Cache\EventSourcererStore;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
@@ -11,6 +12,7 @@ use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
 use Eventsourcerer\EventSourcererLaravel\Repository\CacheWorkerEvents;
 use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
@@ -40,6 +42,10 @@ final class EventSourcererProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/eventsourcerer.php' => config_path('eventsourcerer.php'),
+        ]);
+
+        $this->publishesMigrations([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
         ]);
 
         $manager = $this->app['queue'];
