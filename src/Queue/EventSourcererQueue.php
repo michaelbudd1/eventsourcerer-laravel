@@ -165,4 +165,24 @@ final class EventSourcererQueue extends Queue implements QueueContract
         
         throw new \RuntimeException('Listener socket did not become available within 30 seconds');
     }
+
+    public function pendingSize($queue = null): int
+    {
+        return $this->workerEvents->countFor($this->workerId);
+    }
+
+    public function delayedSize($queue = null): null
+    {
+        return null;
+    }
+
+    public function reservedSize($queue = null): null
+    {
+        return null;
+    }
+
+    public function creationTimeOfOldestPendingJob($queue = null): null
+    {
+        return null;
+    }
 }
