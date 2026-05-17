@@ -10,14 +10,21 @@ use Illuminate\Console\Command;
 #[Description('Validates that each stream was processed by 1 worker and in sequence')]
 final class ValidateWorkerSequencing extends Command
 {
-    public function __invoke(SymfonyStyle $style): int
+    public function __invoke(): int
     {
         $processed = [];
-
         $errorsFound = 0;
+        $storagePath = storage_path();
 
-        foreach (self::logFiles($this->eventsourcererProjectDir) as $logFile) {
-            $fh = fopen($this->eventsourcererProjectDir . '/var/log/' . $logFile, 'r');
+        foreach (self::logFiles($storagePath) as $logFile) {
+            $fh = fopen(
+                sprintf(
+                    '%s/%s',
+                    $storagePath,
+                    $logFile,
+                ),
+                'r',
+            );
 
             $lineNumber = 0;
 
@@ -79,12 +86,10 @@ final class ValidateWorkerSequencing extends Command
         return Command::SUCCESS;
     }
 
-    private static function logFiles(string $eventsourcererProjectDir): iterable
+    private static function logFiles(string $storagePath): iterable
     {
-        $logsDir = $eventsourcererProjectDir . '/var/log';
-
-        foreach (scandir($logsDir) as $logFile) {
-            if (preg_match('/worker-\d+\.log$/', $logFile)) {
+        foreach (scandir($storagePath) as $logFile) {
+            if (preg_match('/worker\-(.)+\.log$/', $logFile)) {
                 yield $logFile;
             }
         }

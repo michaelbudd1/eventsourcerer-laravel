@@ -30,14 +30,15 @@ final class NewEventJob implements ShouldQueue
     public function handle(): void
     {
         $message = sprintf(
-            'Received event from stream "%s"; with type "%s"; with sequence "%d" and ALL sequence "%d"',
-            $this->event['stream'],
+            '%s %s %s %s at %s',
             $this->event['name'],
+            $this->event['stream'],
+            $this->event['allSequence'],
             $this->event['number'],
-            $this->event['allSequence']
+            date('H:i:s')
         );
 
-        $logFile = sprintf('worked-%s-%s.log', $this->event['workerId'], Carbon::now()->format('Ymd'));
+        $logFile = sprintf('%s-%s.log', $this->event['workerId'], Carbon::now()->format('Ymd'));
 
         $fh = fopen(storage_path($logFile), 'a+');
         fwrite($fh, $message . PHP_EOL);
