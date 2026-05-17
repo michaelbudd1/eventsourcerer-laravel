@@ -6,6 +6,7 @@ namespace Eventsourcerer\EventSourcererLaravel\Providers;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\Testing\ValidateWorkerSequencing;
+use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
 use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
 use Eventsourcerer\EventSourcererLaravel\EventHandler;
 use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
@@ -58,6 +59,7 @@ final class EventSourcererProvider extends ServiceProvider
             $this->commands([
                 ListenForEvents::class,
                 ValidateWorkerSequencing::class,
+                WriteNewEvent::class,
             ]);
         }
     }
