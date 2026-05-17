@@ -48,7 +48,7 @@ final class ValidateWorkerSequencing extends Command
                 $processed[$stream][$sequence][] = ['file' => $logFile, 'line' => $lineNumber];
 
                 if (1 !== count($processed[$stream][$sequence])) {
-                    $style->warning(
+                    $this->warn(
                         sprintf(
                             'Stream %s sequence %d was processed several times (first: %s:%d, duplicate: %s:%d)',
                             $stream,
@@ -66,7 +66,7 @@ final class ValidateWorkerSequencing extends Command
                 if ($sequence < $maxSequence) {
                     $errorsFound++;
 
-                    $style->warning(
+                    $this->warn(
                         sprintf(
                             'Stream %s sequence %d is not in correct order',
                             $stream,
@@ -78,9 +78,9 @@ final class ValidateWorkerSequencing extends Command
         }
 
         if (0 === $errorsFound) {
-            $style->success('No errors found');
+            $this->line('No errors found');
         } else {
-            $style->error(sprintf('%d errors found', $errorsFound));
+            $this->warn(sprintf('%d errors found', $errorsFound));
         }
 
         return Command::SUCCESS;
