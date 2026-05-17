@@ -8,6 +8,7 @@ use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent as WriteNewEventCommand;
 use Eventsourcerer\EventSourcererLaravel\Exception\QueueCannotProcessJob;
 use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
+use Illuminate\Contracts\Process\InvokedProcess;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use Illuminate\Queue\Queue;
@@ -33,6 +34,8 @@ final class EventSourcererQueue extends Queue implements QueueContract
      */
     private $localConnection;
 
+    private ?InvokedProcess $listener = null;
+
     public function __construct(
         private readonly WorkerEvents $workerEvents,
         private readonly Client $client,
@@ -43,6 +46,8 @@ final class EventSourcererQueue extends Queue implements QueueContract
         $this->waitForSocket();
 
         $this->localConnection = $this->client->createLocalConnection();
+
+        $this->registerShutdownHandler();
     }
 
     public function size($queue = null): int
@@ -111,6 +116,26 @@ final class EventSourcererQueue extends Queue implements QueueContract
         );
     }
 
+    public function pendingSize($queue = null): int
+    {
+        return $this->workerEvents->countFor($this->workerId);
+    }
+
+    public function delayedSize($queue = null): null
+    {
+        return null;
+    }
+
+    public function reservedSize($queue = null): null
+    {
+        return null;
+    }
+
+    public function creationTimeOfOldestPendingJob($queue = null): null
+    {
+        return null;
+    }
+
     private function startListenerCommand(): void
     {
         $signature = str_replace(
@@ -119,9 +144,7 @@ final class EventSourcererQueue extends Queue implements QueueContract
             ListenForEvents::SIGNATURE
         );
 
-        $command = sprintf('php artisan %s', $signature);
-
-        Process::start($command);
+        $this->listener = Process::timeout(0)->start(['php', 'artisan', ...explode(' ', $signature)]);
     }
 
     private static function writeEventCommand(
@@ -166,23 +189,22 @@ final class EventSourcererQueue extends Queue implements QueueContract
         throw new \RuntimeException('Listener socket did not become available within 30 seconds');
     }
 
-    public function pendingSize($queue = null): int
+    private function registerShutdownHandler(): void
     {
-        return $this->workerEvents->countFor($this->workerId);
-    }
+        pcntl_async_signals(true);
 
-    public function delayedSize($queue = null): null
-    {
-        return null;
-    }
+        pcntl_signal(SIGINT, function (): void {
+            $this->client->stopCatchup();
+            $this->listener->stop();
 
-    public function reservedSize($queue = null): null
-    {
-        return null;
-    }
+            exit(0);
+        });
 
-    public function creationTimeOfOldestPendingJob($queue = null): null
-    {
-        return null;
+        pcntl_signal(SIGTERM, function (): void {
+            $this->client->stopCatchup();
+            $this->listener->stop();
+
+            exit(0);
+        });
     }
 }
