@@ -15,10 +15,7 @@
     ],
     "require": {
         "php": ">=8.5",
-        "illuminate/support": "^13.7.0",
-        "illuminate/console": "^13.7.0",
-        "eventsourcerer/event-sourcerer-client": "dev-main",
-        "illuminate/queue": "13.7.0"
+        "eventsourcerer/event-sourcerer-client": "dev-main"
     },
     "extra": {
         "laravel": {
