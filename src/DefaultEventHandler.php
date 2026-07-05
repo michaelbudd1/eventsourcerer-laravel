@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel;
+namespace EventSourcerer\EventSourcererLaravel;
 
 use Eventsourcerer\EventSourcererLaravel\Queue\NewEventJob;
 

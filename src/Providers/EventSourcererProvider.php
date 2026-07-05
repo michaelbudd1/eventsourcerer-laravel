@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Providers;
+namespace EventSourcerer\EventSourcererLaravel\Providers;
 
 use Eventsourcerer\EventSourcererLaravel\Cache\EventSourcererStore;
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;

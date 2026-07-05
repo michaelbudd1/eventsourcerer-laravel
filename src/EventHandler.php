@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventsourcerer\EventSourcererLaravel;
+namespace EventSourcerer\EventSourcererLaravel;
 
 interface EventHandler
 {

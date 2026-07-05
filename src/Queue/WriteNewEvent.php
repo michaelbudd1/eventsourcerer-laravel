@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Queue;
+namespace EventSourcerer\EventSourcererLaravel\Queue;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

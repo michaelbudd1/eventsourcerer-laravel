@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
+namespace EventSourcerer\EventSourcererLaravel\Console\Commands;
 
 use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Console\Command;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Console\Commands;
+namespace EventSourcerer\EventSourcererLaravel\Console\Commands;
 
 use Illuminate\Console\Command;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;

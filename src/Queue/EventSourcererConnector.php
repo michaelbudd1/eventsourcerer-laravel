@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Queue;
+namespace EventSourcerer\EventSourcererLaravel\Queue;
 
 use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
 use Illuminate\Database\Connectors\ConnectorInterface;

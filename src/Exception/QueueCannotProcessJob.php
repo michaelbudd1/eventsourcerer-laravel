@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Exception;
+namespace EventSourcerer\EventSourcererLaravel\Exception;
 
 use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
 

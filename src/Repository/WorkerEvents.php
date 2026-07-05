@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventsourcerer\EventSourcererLaravel\Repository;
+namespace EventSourcerer\EventSourcererLaravel\Repository;
 
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
 
