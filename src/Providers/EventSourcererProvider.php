@@ -28,7 +28,13 @@ final class EventSourcererProvider extends ServiceProvider
                     config('eventsourcerer.host'),
                     config('eventsourcerer.url'),
                     (int) config('eventsourcerer.port'),
-                    config('eventsourcerer.applicationId')
+                    config('eventsourcerer.applicationId'),
+                    config('eventsourcerer.secure', false),
+                    config('eventsourcerer.localCertificateDirectory'),
+                    config('eventsourcerer.verifyPeer', false),
+                    config('eventsourcerer.verifyPeerName', false),
+                    config('eventsourcerer.allowSelfSigned', false),
+                    config('eventsourcerer.cafile'),
                 ),
             );
         });
