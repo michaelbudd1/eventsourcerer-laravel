@@ -15,7 +15,7 @@ use PearTreeWeb\EventSourcerer\LaravelClient\Repository\WorkerEvents;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;
-use PearTreeWebLtd\EventSourcererMessageUtilities\Model\ApplicationType;
+use PearTreeWeb\EventSourcerer\Common\Model\ApplicationType;
 
 final class EventSourcererProvider extends ServiceProvider
 {

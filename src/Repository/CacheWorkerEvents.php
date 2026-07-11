@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PearTreeWeb\EventSourcerer\LaravelClient\Repository;
 
 use Illuminate\Support\Facades\DB;
-use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;
+use PearTreeWeb\EventSourcerer\Common\Model\WorkerId;
 
 final readonly class CacheWorkerEvents implements WorkerEvents
 {

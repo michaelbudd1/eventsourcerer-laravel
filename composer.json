@@ -15,7 +15,8 @@
     ],
     "require": {
         "php": ">=8.5",
-        "eventsourcerer/event-sourcerer-client": "dev-main"
+        "eventsourcerer/event-sourcerer-client": "dev-main",
+        "eventsourcerer/common": "dev-main"
     },
     "extra": {
         "laravel": {
