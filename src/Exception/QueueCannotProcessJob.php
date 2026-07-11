@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Exception;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Exception;
 
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
+use PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\WriteNewEvent;
 
 final class QueueCannotProcessJob extends \RuntimeException
 {

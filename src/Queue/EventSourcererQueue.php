@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Queue;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Queue;
 
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent as WriteNewEventCommand;
-use Eventsourcerer\EventSourcererLaravel\Exception\QueueCannotProcessJob;
-use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\ListenForEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\WriteNewEvent as WriteNewEventCommand;
+use PearTreeWeb\EventSourcerer\LaravelClient\Exception\QueueCannotProcessJob;
+use PearTreeWeb\EventSourcerer\LaravelClient\Repository\WorkerEvents;
 use Illuminate\Contracts\Process\InvokedProcess;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Contracts\Queue\Queue as QueueContract;

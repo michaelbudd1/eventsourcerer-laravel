@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventsourcerer\EventSourcererLaravel\Console\Commands\Testing;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\Testing;
 
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;

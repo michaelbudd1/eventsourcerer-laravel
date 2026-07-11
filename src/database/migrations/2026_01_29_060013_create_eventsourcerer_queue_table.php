@@ -1,6 +1,6 @@
 <?php
 
-use Eventsourcerer\EventSourcererLaravel\Repository\CacheWorkerEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Repository\CacheWorkerEvents;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

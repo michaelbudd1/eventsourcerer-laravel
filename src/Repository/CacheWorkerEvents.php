@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Repository;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Repository;
 
 use Illuminate\Support\Facades\DB;
 use PearTreeWebLtd\EventSourcererMessageUtilities\Model\WorkerId;

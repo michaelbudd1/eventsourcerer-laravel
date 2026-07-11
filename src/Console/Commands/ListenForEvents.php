@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Console\Commands;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands;
 
-use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Repository\WorkerEvents;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;

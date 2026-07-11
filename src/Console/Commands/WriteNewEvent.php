@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Console\Commands;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands;
 
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;

@@ -1,16 +1,16 @@
 {
     "name": "eventsourcerer/event-sourcerer-laravel",
-    "description": "Tools for connecting to EventSourcerer and processing events",
+    "description": "Laravel client for EventSourcerer",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "EventSourcerer\\EventSourcererLaravel\\": "src/"
+            "PearTreeWeb\\EventSourcerer\\LaravelClient\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "michaelbudd",
-            "email": "michaelbudd6@gmail.com"
+            "name": "Pear Tree Web Ltd",
+            "email": "contact@peartreeweb.com"
         }
     ],
     "require": {
@@ -20,7 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Eventsourcerer\\EventSourcererLaravel\\Providers\\EventSourcererProvider"
+                "PearTreeWeb\\EventSourcerer\\LaravelClient\\Providers\\EventSourcererProvider"
             ]
         }
     },

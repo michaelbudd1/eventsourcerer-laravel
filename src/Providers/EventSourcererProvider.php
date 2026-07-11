@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Providers;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Providers;
 
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\ListenForEvents;
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\Testing\ValidateWorkerSequencing;
-use Eventsourcerer\EventSourcererLaravel\Console\Commands\WriteNewEvent;
-use Eventsourcerer\EventSourcererLaravel\DefaultEventHandler;
-use Eventsourcerer\EventSourcererLaravel\EventHandler;
-use Eventsourcerer\EventSourcererLaravel\Queue\EventSourcererConnector;
-use Eventsourcerer\EventSourcererLaravel\Repository\CacheWorkerEvents;
-use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\ListenForEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\Testing\ValidateWorkerSequencing;
+use PearTreeWeb\EventSourcerer\LaravelClient\Console\Commands\WriteNewEvent;
+use PearTreeWeb\EventSourcerer\LaravelClient\DefaultEventHandler;
+use PearTreeWeb\EventSourcerer\LaravelClient\EventHandler;
+use PearTreeWeb\EventSourcerer\LaravelClient\Queue\EventSourcererConnector;
+use PearTreeWeb\EventSourcerer\LaravelClient\Repository\CacheWorkerEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Repository\WorkerEvents;
 use Illuminate\Support\ServiceProvider;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Config;

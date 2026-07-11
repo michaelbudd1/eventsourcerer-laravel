@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel\Queue;
+namespace PearTreeWeb\EventSourcerer\LaravelClient\Queue;
 
-use Eventsourcerer\EventSourcererLaravel\Repository\WorkerEvents;
+use PearTreeWeb\EventSourcerer\LaravelClient\Repository\WorkerEvents;
 use Illuminate\Database\Connectors\ConnectorInterface;
 use PearTreeWeb\EventSourcerer\Client\Infrastructure\Client;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EventSourcerer\EventSourcererLaravel;
+namespace PearTreeWeb\EventSourcerer\LaravelClient;
 
-use Eventsourcerer\EventSourcererLaravel\Queue\NewEventJob;
+use PearTreeWeb\EventSourcerer\LaravelClient\Queue\NewEventJob;
 
 final readonly class DefaultEventHandler implements EventHandler
 {

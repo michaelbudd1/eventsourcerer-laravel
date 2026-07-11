@@ -1,6 +1,6 @@
 <?php
 
-namespace EventSourcerer\EventSourcererLaravel;
+namespace PearTreeWeb\EventSourcerer\LaravelClient;
 
 interface EventHandler
 {
